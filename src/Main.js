@@ -67,10 +67,31 @@ const translate = () => {
 }
 
 
-const reflect = () => {
+const reflecty = () => {
+    let mirror = 50
+    setShapeState(shapeState.map((x) => {if (mirror > x){
+        if (mirror - x < 10){
+            return  x+10
+        } else {
+            return x + 2*(mirror - Math.floor(x/10)*10) - 10
+        }
+    }
+        else if (mirror <= x){
+            if (x- mirror < 10){
+                return x - 10
+            } else {
+            return x + 2*(mirror - Math.floor(x/10)*10) - 10
+        } 
+    }
+    
 
-
+}))
 }
+
+const reflect = () => {
+    reflecty()
+}
+
 
 const handleXChange = event => {
     setUserXAnswer(parseInt(event.target.value))
