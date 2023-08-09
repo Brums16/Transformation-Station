@@ -14,11 +14,11 @@ import correcttriangle from './green-triangle-3.png'
 const Main = () => {
 
 
-const startingLocation = (Math.floor(Math.random()*100)) 
-const targetLocation = (Math.floor(Math.random()*100)) 
+const startingLocation = (Math.floor(Math.random()*80))
+const targetLocation = (Math.floor(Math.random()*80)) 
 
-const [shapeState, setShapeState] = useState(startingLocation)
-const [targetShapeState, setTargetShapeState] = useState(targetLocation)
+const [shapeState, setShapeState] = useState([startingLocation, startingLocation+10, startingLocation+20, startingLocation+21])
+const [targetShapeState, setTargetShapeState] = useState([targetLocation, targetLocation+10, targetLocation+20,targetLocation+21])
 const [correctShapeState, setCorrectShapeState] = useState()
 const [userXAnswer, setUserXAnswer] = useState()
 const [userYAnswer, setUserYAnswer] = useState()
@@ -29,20 +29,13 @@ const [userYAnswer, setUserYAnswer] = useState()
 const gridSquares = () => {
     let gridArray = []
     for(let i = 0; i < 100; i++){
-        if (i === correctShapeState){
+        if (shapeState.includes(i)){
             gridArray.push(<div key={i} id ="shape" className="grid-item" 
             style={{
-                backgroundColor: "green"
-            }}>
-                </div>)
-        }
-        else if (i === shapeState){
-            gridArray.push(<div key={i} id ="shape" className="grid-item" 
-            style={{
-                backgroundColor: "#366ed8"
+                backgroundColor: correctShapeState ?  "green" : "#366ed8"
             }}></div>)
         }
-        else if (i === targetShapeState){
+        else if (targetShapeState.includes(i)){
             gridArray.push(<div key={i} id ="shape" className="grid-item" 
             style={{
                 backgroundColor: "#041562"
@@ -66,11 +59,9 @@ const gridSquares = () => {
 }
 
 const move = () => {
-    console.log(userXAnswer)
-    console.log(userYAnswer)
-    console.log(shapeState)
-    setShapeState(shapeState + userXAnswer + (userYAnswer*(-10)))
-    console.log(shapeState)
+
+    setShapeState(shapeState.map((x) => x + userXAnswer + (userYAnswer*(-10))))
+
 }
 
 const handleXChange = event => {
@@ -82,10 +73,24 @@ const handleYChange = event => {
 }
 
 useEffect(() => {
-    if(shapeState===targetShapeState){
-    setCorrectShapeState(shapeState)
+    console.log(shapeState)
+    console.log(targetShapeState)
+    console.log(correctShapeState)
+    if(arraysEqual(shapeState,targetShapeState)){
+    setCorrectShapeState(true)
     }
 }, [shapeState])
+
+
+function arraysEqual(a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  }
 
 
 const vectorTranslation = () => {

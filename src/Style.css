@@ -245,6 +245,6 @@ input {
 .bracket-div {
   display: flex;
   flex-direction: row;
-  width: 50px;
+  width: 350px;
   font-size: 20px;
 }
