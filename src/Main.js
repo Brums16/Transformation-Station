@@ -67,8 +67,8 @@ const translate = () => {
 }
 
 
-const reflecty = () => {
-    let mirror = 50
+const reflectx = () => {
+    let mirror = 50-userMirrorValue*10
     setShapeState(shapeState.map((x) => {if (mirror > x){
         if (mirror - x < 10){
             return  x+10
@@ -89,7 +89,9 @@ const reflecty = () => {
 }
 
 const reflect = () => {
-    reflecty()
+    if (userMirrorAxis==="x"){
+    reflectx()
+    }
 }
 
 
@@ -102,7 +104,7 @@ const handleYChange = event => {
 }
 
 const handleMirrorAxisChange = event => {
-    setUserMirrorAxis(parseInt(event.target.value))
+    setUserMirrorAxis(event.target.value)
 }
 
 const handleMirrorValueChange = event => {
