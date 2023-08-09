@@ -22,6 +22,8 @@ const [targetShapeState, setTargetShapeState] = useState([targetLocation, target
 const [correctShapeState, setCorrectShapeState] = useState()
 const [userXAnswer, setUserXAnswer] = useState()
 const [userYAnswer, setUserYAnswer] = useState()
+const [userMirrorAxis, setUserMirrorAxis] = useState()
+const [userMirrorValue, setUserMirrorValue] = useState()
 
 
 
@@ -58,9 +60,15 @@ const gridSquares = () => {
     return gridArray
 }
 
-const move = () => {
+const translate = () => {
 
     setShapeState(shapeState.map((x) => x + userXAnswer + (userYAnswer*(-10))))
+
+}
+
+
+const reflect = () => {
+
 
 }
 
@@ -71,6 +79,15 @@ const handleXChange = event => {
 const handleYChange = event => {
     setUserYAnswer(parseInt(event.target.value))
 }
+
+const handleMirrorAxisChange = event => {
+    setUserMirrorAxis(parseInt(event.target.value))
+}
+
+const handleMirrorValueChange = event => {
+    setUserMirrorValue(parseInt(event.target.value))
+}
+
 
 useEffect(() => {
     console.log(shapeState)
@@ -112,6 +129,27 @@ const vectorTranslation = () => {
     
     }
 
+const reflection = () => {
+    return(
+        <div className = "reflection-div">
+            Mirror Line: <div><input type="text"
+             id="userMirrorAxisAnswer" 
+             name="userMirrorAxisAnswer"  
+             onChange={handleMirrorAxisChange} 
+             /> = 
+            <input type="text"
+             id="userMirrorValueAnswer" 
+             name="userMirrorValueAnswer"  
+             onChange={handleMirrorValueChange} 
+             /></div>
+             
+        </div>
+       
+    )
+    
+    }
+
+
 
 
     return (
@@ -124,8 +162,21 @@ const vectorTranslation = () => {
             {vectorTranslation()}
             
             
-            <button onClick={move}>TRANSLATE</button>       
+            <button onClick={translate}>TRANSLATE</button> 
+
+
         </div>
+        <div className = "transformation-button-div">
+            {reflection()}
+            
+            
+            <button onClick={reflect}>REFLECT</button> 
+
+
+        </div>
+
+
+
         </div>
     )
 
