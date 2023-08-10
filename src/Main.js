@@ -55,7 +55,7 @@ const gridSquares = () => {
         else if (i===55){
             gridArray.push(<div key={i} id ="grid-{i}" className="grid-item x-axis y-axis">{i-55}</div>)
         } else {
-            gridArray.push(<div key={i} id ="grid-{i}" className="grid-item">{i}</div>)
+            gridArray.push(<div key={i} id ="grid-{i}" className="grid-item"></div>)
         }
         
            
@@ -184,12 +184,12 @@ const vectorTranslation = () => {
 const reflection = () => {
     return(
         <div className = "reflection-div">
-            Mirror Line: <div><input type="text"
+            Mirror Line: <div><input type="text" className="mirror-input"
              id="userMirrorAxisAnswer" 
              name="userMirrorAxisAnswer"  
              onChange={handleMirrorAxisChange} 
              /> = 
-            <input type="text"
+            <input type="text" className='mirror-input'
              id="userMirrorValueAnswer" 
              name="userMirrorValueAnswer"  
              onChange={handleMirrorValueChange} 

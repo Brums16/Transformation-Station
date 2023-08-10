@@ -232,8 +232,12 @@ img {
 
 input {
   width: 20%;
-  
+  text-align: center;
   align-items: center;
+}
+
+.mirror-input {
+  height: 20px
 }
 
 .transformation-button-div {
@@ -260,7 +264,7 @@ input {
 
 .reflection-div {
   width: 300px;
-  font-size: 15px;
+  font-size: 25px;
   justify-content: center;
 
 }
