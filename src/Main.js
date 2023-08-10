@@ -14,25 +14,19 @@ import correcttriangle from './green-triangle-3.png'
 const Main = () => {
 
 
-let startingLocation
-do {
-    (startingLocation = Math.floor(Math.random()*80)+20)
-}
-while (startingLocation % 10 ===9)
-let targetLocation 
-do {
-    (targetLocation = Math.floor(Math.random()*80)+20)
-}
-while (targetLocation % 10 ===9)
- 
 
-const [shapeState, setShapeState] = useState([startingLocation, startingLocation-10, startingLocation-20, startingLocation+1])
-const [targetShapeState, setTargetShapeState] = useState([targetLocation, targetLocation-10, targetLocation-20,targetLocation+1])
+const startingShapeState = generateStartingShapeState()
+const startingTargetState = generateTargetState()
+const [shapeState, setShapeState] = useState(startingShapeState)
+const [targetShapeState, setTargetShapeState] = useState(startingTargetState)
 const [correctShapeState, setCorrectShapeState] = useState()
 const [userXAnswer, setUserXAnswer] = useState()
 const [userYAnswer, setUserYAnswer] = useState()
 const [userMirrorAxis, setUserMirrorAxis] = useState()
 const [userMirrorValue, setUserMirrorValue] = useState()
+
+
+
 
 
 
@@ -43,7 +37,7 @@ const gridSquares = () => {
         if (shapeState.includes(i)){
             gridArray.push(<div key={i} id ="shape" className="grid-item" 
             style={{
-                backgroundColor: correctShapeState ?  "green" : "#366ed8"
+                backgroundColor: correctShapeState ?  "green" : targetShapeState.includes(i) ? "#315ea1" : "#366ed8"
             }}></div>)
         }
         else if (targetShapeState.includes(i)){
@@ -239,5 +233,77 @@ const reflection = () => {
     )
 
 }
+
+
+function randInt2() {
+    return (Math.floor(Math.random()*2)===0)
+}
+
+function generateStartingShapeState() {
+    let startingLocation
+    let startingShapeState
+    if (randInt2()){
+        do {
+        (startingLocation = Math.floor(Math.random()*80)+20)
+        }
+        while (startingLocation % 10 ===9||startingLocation % 10 ===0)
+    if (randInt2()){
+        startingShapeState = [startingLocation, startingLocation-10, startingLocation-20, startingLocation+1]
+    } else {
+        startingShapeState = [startingLocation, startingLocation-10, startingLocation-20, startingLocation-1]
+    }
+}
+    else  {
+        do{
+        (startingLocation = Math.floor(Math.random()*80))
+        }
+        while (startingLocation % 10 ===9||startingLocation % 10 ===0)
+    if (randInt2()){
+        startingShapeState = [startingLocation, startingLocation+10, startingLocation+20, startingLocation+1]
+    } else {
+        startingShapeState = [startingLocation, startingLocation+10, startingLocation+20, startingLocation-1]
+    }
+    }
+    return startingShapeState
+
+}
+
+function generateTargetState() {
+    let startingTargetLocation
+    let startingTargetState
+    if (randInt2()){
+        do {
+            (startingTargetLocation = Math.floor(Math.random()*80)+20)
+        }
+        while (startingTargetLocation % 10 ===9||startingTargetLocation % 10 === 0)
+        if (randInt2()){
+            startingTargetState = [startingTargetLocation, startingTargetLocation-10, startingTargetLocation-20, startingTargetLocation+1]
+        } else {
+            startingTargetState = [startingTargetLocation, startingTargetLocation-10, startingTargetLocation-20, startingTargetLocation-1]
+        }
+    }
+    else {
+        do {
+            (startingTargetLocation = Math.floor(Math.random()*80))
+        }
+        while (startingTargetLocation % 10 ===9||startingTargetLocation % 10 === 0)
+        if (randInt2()){
+            startingTargetState = [startingTargetLocation, startingTargetLocation+10, startingTargetLocation+20, startingTargetLocation+1]
+        } else {
+            startingTargetState = [startingTargetLocation, startingTargetLocation+10, startingTargetLocation+20, startingTargetLocation-1]
+        }
+    }
+    return startingTargetState
+}
+
+
+
+
+
+
+
+
+
+
 
 export default Main
