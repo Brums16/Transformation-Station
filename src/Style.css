@@ -176,7 +176,6 @@ button {
   height: 500px;
   border: 2px solid black;
   margin: auto;
-  margin-bottom: 50px;
 }
 
 .grid-item {
@@ -226,34 +225,72 @@ img {
   flex-direction: column;
   align-items: center;
   align-self: center;
+ 
+  width: 100px;
 
 }
 
 input {
   width: 20%;
+  
+  align-items: center;
 }
 
 .transformation-button-div {
   display: flex;
-  width: 40%;
+  width: 20%;
   flex-direction: row;
   justify-content: center;  
   align-items: center;
   margin: auto;
-  margin-bottom: 50px
+
 }
 
 .bracket-div {
-  display: flex;
+
+  display: grid;
+  grid-template-columns: auto auto auto auto;
   flex-direction: row;
-  width: 350px;
+  justify-content: center;
+  width: 300px;
   font-size: 15px;
+  align-self: center;
+  align-items: center;
 }
 
 .reflection-div {
-  display: flex;
-  flex-direction: row;
-  width: 500px;
+  width: 300px;
   font-size: 15px;
-  justify-content: space-between;
+  justify-content: center;
+
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+
+button {
+  z-index: 2;
+  border-radius: 10px;
+  height: 4vh;
+  width: 15vh;
+  color: white;
+  background-color: var(--color1);
+  border: 3px solid var(--color2);
+  font-size: 2vh;
+  margin-left: 20px;
+
+}
+
+.bracketClass {
+  font-size: 40px;
+}
+
+#userMirrorAxisAnswer {
+  margin-right: 5px;
+}
+
+#userMirrorValueAnswer {
+  margin-left: 10px;
 }

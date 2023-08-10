@@ -14,11 +14,20 @@ import correcttriangle from './green-triangle-3.png'
 const Main = () => {
 
 
-const startingLocation = (Math.floor(Math.random()*80))
-const targetLocation = (Math.floor(Math.random()*80)) 
+let startingLocation
+do {
+    (startingLocation = Math.floor(Math.random()*80)+20)
+}
+while (startingLocation % 10 ===9)
+let targetLocation 
+do {
+    (targetLocation = Math.floor(Math.random()*80)+20)
+}
+while (targetLocation % 10 ===9)
+ 
 
-const [shapeState, setShapeState] = useState([startingLocation, startingLocation+10, startingLocation+20, startingLocation+21])
-const [targetShapeState, setTargetShapeState] = useState([targetLocation, targetLocation+10, targetLocation+20,targetLocation+21])
+const [shapeState, setShapeState] = useState([startingLocation, startingLocation-10, startingLocation-20, startingLocation+1])
+const [targetShapeState, setTargetShapeState] = useState([targetLocation, targetLocation-10, targetLocation-20,targetLocation+1])
 const [correctShapeState, setCorrectShapeState] = useState()
 const [userXAnswer, setUserXAnswer] = useState()
 const [userYAnswer, setUserYAnswer] = useState()
@@ -61,7 +70,7 @@ const gridSquares = () => {
 }
 
 const translate = () => {
-
+    
     setShapeState(shapeState.map((x) => x + userXAnswer + (userYAnswer*(-10))))
 
 }
@@ -88,9 +97,35 @@ const reflecty = () => {
 }))
 }
 
+const reflectx = () => {
+    let mirror = 5+userMirrorValue
+    setShapeState(shapeState.map((x) => {if (mirror > x % 10){
+        if (mirror - x  % 10<= 1){
+            return  x + 1
+        } else {
+            return x + 2*(mirror - x % 10) - 1
+        }
+    }
+        else if (mirror <= x % 10){
+            if (x- mirror < 1){
+                return x - 1
+            } else {
+            return x + 2*(mirror - (x % 10)) - 1
+        } 
+    }
+    
+
+}))
+}
+
+
+
 const reflect = () => {
     if (userMirrorAxis==="y"){
     reflecty()
+    }
+    if (userMirrorAxis==="x"){
+        reflectx()
     }
 }
 
@@ -118,7 +153,7 @@ useEffect(() => {
     console.log(correctShapeState)
     if(arraysEqual(shapeState,targetShapeState)){
     setCorrectShapeState(true)
-    }
+    } else setCorrectShapeState(false)
 }, [shapeState])
 
 
@@ -134,7 +169,7 @@ function arraysEqual(a, b) {
 
 
 const vectorTranslation = () => {
-    return(<div className="bracket-div"><p>(</p>
+    return(<div className="bracket-div"><p>Translation Vector: </p><p className="bracketClass">(</p>
         <div className = "vector-div">
             <input type="text"
              id="userXAnswer" 
@@ -146,7 +181,7 @@ const vectorTranslation = () => {
              name="userYAnswer"  
              onChange={handleYChange} 
              />
-        </div><p>)</p>
+        </div><p className="bracketClass">)</p>
         </div>
     )
     
@@ -185,7 +220,7 @@ const reflection = () => {
             {vectorTranslation()}
             
             
-            <button onClick={translate}>TRANSLATE</button> 
+            <button onClick={translate}>Translate</button> 
 
 
         </div>
@@ -193,7 +228,7 @@ const reflection = () => {
             {reflection()}
             
             
-            <button onClick={reflect}>REFLECT</button> 
+            <button onClick={reflect}>Reflect</button> 
 
 
         </div>
